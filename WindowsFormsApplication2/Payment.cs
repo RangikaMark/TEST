@@ -186,7 +186,7 @@ namespace AutoParts
             }
             else
             {
-                MessageBox.Show("Provided barcode number is wrong. Please re-check the number");
+                MessageBox.Show("Provided barcode number is wrong. Please re-check the number.");
             }
         }
 
