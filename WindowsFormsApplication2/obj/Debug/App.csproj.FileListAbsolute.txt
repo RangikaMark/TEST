@@ -1,0 +1,33 @@
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\App.csprojResolveAssemblyReference.cache
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\App.csproj.GenerateResource.Cache
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\AutoParts.exe.config
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\AutoParts.exe
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\AutoParts.pdb
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Properties.Resources.resources
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.exe
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.pdb
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Customer.resources
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Payment.resources
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.MainMenu.resources
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Search.resources
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Login.resources
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MySql.Data.dll
+C:\Users\Chrishane lloyd\Documents\Visual Studio 2015\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MySql.Data.xml
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\AutoParts.exe.config
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.exe
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.pdb
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\AutoParts.exe
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\AutoParts.pdb
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MySql.Data.dll
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\MySql.Data.xml
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\App.csprojResolveAssemblyReference.cache
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Customer.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Search.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Payment.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.MainMenu.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Login.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.Properties.Resources.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\App.csproj.GenerateResource.Cache
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.signup.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.stock.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.AddItem.resources
