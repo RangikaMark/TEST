@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Button button2;
+            System.Windows.Forms.Button btnAddItems;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddItem));
             this.txtPartNumber = new System.Windows.Forms.TextBox();
             this.txtCost = new System.Windows.Forms.TextBox();
             this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.txtItemBrand = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,7 +42,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtPartName = new System.Windows.Forms.TextBox();
             this.txtCompanyNo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtdate = new System.Windows.Forms.TextBox();
@@ -52,11 +50,32 @@
             this.lblPid = new System.Windows.Forms.Label();
             this.txtPid = new System.Windows.Forms.TextBox();
             this.cmbSup = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            button2 = new System.Windows.Forms.Button();
+            this.cmbCountry = new System.Windows.Forms.ComboBox();
+            this.cmbVBrand = new System.Windows.Forms.ComboBox();
+            this.cmbV = new System.Windows.Forms.ComboBox();
+            this.cmbItemBrand = new System.Windows.Forms.ComboBox();
+            this.cmbPartName = new System.Windows.Forms.ComboBox();
+            btnAddItems = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnAddItems
+            // 
+            btnAddItems.BackColor = System.Drawing.Color.Transparent;
+            btnAddItems.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddItems.BackgroundImage")));
+            btnAddItems.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            btnAddItems.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            btnAddItems.FlatAppearance.BorderSize = 0;
+            btnAddItems.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            btnAddItems.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            btnAddItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnAddItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            btnAddItems.ForeColor = System.Drawing.Color.White;
+            btnAddItems.Location = new System.Drawing.Point(271, 246);
+            btnAddItems.Name = "btnAddItems";
+            btnAddItems.Size = new System.Drawing.Size(69, 56);
+            btnAddItems.TabIndex = 33;
+            btnAddItems.UseVisualStyleBackColor = false;
+            btnAddItems.Click += new System.EventHandler(this.btnAddItems_Click);
             // 
             // txtPartNumber
             // 
@@ -65,6 +84,8 @@
             this.txtPartNumber.Name = "txtPartNumber";
             this.txtPartNumber.Size = new System.Drawing.Size(100, 20);
             this.txtPartNumber.TabIndex = 0;
+            this.txtPartNumber.TextChanged += new System.EventHandler(this.txtPartNumber_TextChanged);
+            this.txtPartNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
             // 
             // txtCost
             // 
@@ -73,6 +94,8 @@
             this.txtCost.Name = "txtCost";
             this.txtCost.Size = new System.Drawing.Size(100, 20);
             this.txtCost.TabIndex = 1;
+            this.txtCost.TextChanged += new System.EventHandler(this.txtCost_TextChanged);
+            this.txtCost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
             // 
             // txtBarcode
             // 
@@ -81,15 +104,7 @@
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(100, 20);
             this.txtBarcode.TabIndex = 2;
-            // 
-            // txtItemBrand
-            // 
-            this.txtItemBrand.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtItemBrand.Location = new System.Drawing.Point(139, 380);
-            this.txtItemBrand.Name = "txtItemBrand";
-            this.txtItemBrand.Size = new System.Drawing.Size(100, 20);
-            this.txtItemBrand.TabIndex = 3;
-            this.txtItemBrand.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
             // 
             // label1
             // 
@@ -111,7 +126,7 @@
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.ForeColor = System.Drawing.SystemColors.Info;
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label2.Location = new System.Drawing.Point(17, 161);
+            this.label2.Location = new System.Drawing.Point(17, 202);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 5;
@@ -191,7 +206,7 @@
             this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label8.ForeColor = System.Drawing.SystemColors.Info;
             this.label8.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label8.Location = new System.Drawing.Point(18, 206);
+            this.label8.Location = new System.Drawing.Point(18, 168);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 13);
             this.label8.TabIndex = 11;
@@ -210,21 +225,15 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Vehicle Brand ";
             // 
-            // txtPartName
-            // 
-            this.txtPartName.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtPartName.Location = new System.Drawing.Point(139, 161);
-            this.txtPartName.Name = "txtPartName";
-            this.txtPartName.Size = new System.Drawing.Size(100, 20);
-            this.txtPartName.TabIndex = 15;
-            // 
             // txtCompanyNo
             // 
             this.txtCompanyNo.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtCompanyNo.Location = new System.Drawing.Point(139, 199);
+            this.txtCompanyNo.Location = new System.Drawing.Point(139, 161);
             this.txtCompanyNo.Name = "txtCompanyNo";
             this.txtCompanyNo.Size = new System.Drawing.Size(100, 20);
             this.txtCompanyNo.TabIndex = 16;
+            this.txtCompanyNo.TextChanged += new System.EventHandler(this.txtCompanyNo_TextChanged);
+            this.txtCompanyNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
             // 
             // label10
             // 
@@ -301,59 +310,65 @@
             this.cmbSup.Name = "cmbSup";
             this.cmbSup.Size = new System.Drawing.Size(100, 21);
             this.cmbSup.TabIndex = 29;
+            this.cmbSup.SelectedIndexChanged += new System.EventHandler(this.cmbSup_SelectedIndexChanged);
             // 
-            // comboBox1
+            // cmbCountry
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(139, 271);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 30;
+            this.cmbCountry.FormattingEnabled = true;
+            this.cmbCountry.Location = new System.Drawing.Point(139, 271);
+            this.cmbCountry.Name = "cmbCountry";
+            this.cmbCountry.Size = new System.Drawing.Size(100, 21);
+            this.cmbCountry.TabIndex = 30;
+            this.cmbCountry.SelectedIndexChanged += new System.EventHandler(this.cmbCountry_SelectedIndexChanged);
             // 
-            // comboBox2
+            // cmbVBrand
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(139, 308);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 21);
-            this.comboBox2.TabIndex = 31;
+            this.cmbVBrand.FormattingEnabled = true;
+            this.cmbVBrand.Location = new System.Drawing.Point(139, 308);
+            this.cmbVBrand.Name = "cmbVBrand";
+            this.cmbVBrand.Size = new System.Drawing.Size(100, 21);
+            this.cmbVBrand.TabIndex = 31;
+            this.cmbVBrand.SelectedIndexChanged += new System.EventHandler(this.cmbVBrand_SelectedIndexChanged);
             // 
-            // comboBox3
+            // cmbV
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(139, 343);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(100, 21);
-            this.comboBox3.TabIndex = 32;
+            this.cmbV.FormattingEnabled = true;
+            this.cmbV.Location = new System.Drawing.Point(139, 343);
+            this.cmbV.Name = "cmbV";
+            this.cmbV.Size = new System.Drawing.Size(100, 21);
+            this.cmbV.TabIndex = 32;
+            this.cmbV.SelectedIndexChanged += new System.EventHandler(this.cmbV_SelectedIndexChanged);
             // 
-            // button2
+            // cmbItemBrand
             // 
-            button2.BackColor = System.Drawing.Color.Transparent;
-            button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            button2.ForeColor = System.Drawing.Color.White;
-            button2.Location = new System.Drawing.Point(271, 246);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(69, 56);
-            button2.TabIndex = 33;
-            button2.UseVisualStyleBackColor = false;
+            this.cmbItemBrand.FormattingEnabled = true;
+            this.cmbItemBrand.Location = new System.Drawing.Point(139, 378);
+            this.cmbItemBrand.Name = "cmbItemBrand";
+            this.cmbItemBrand.Size = new System.Drawing.Size(100, 21);
+            this.cmbItemBrand.TabIndex = 34;
+            this.cmbItemBrand.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // cmbPartName
+            // 
+            this.cmbPartName.FormattingEnabled = true;
+            this.cmbPartName.Location = new System.Drawing.Point(139, 202);
+            this.cmbPartName.Name = "cmbPartName";
+            this.cmbPartName.Size = new System.Drawing.Size(100, 21);
+            this.cmbPartName.TabIndex = 35;
+            this.cmbPartName.SelectedIndexChanged += new System.EventHandler(this.cmbPartName_SelectedIndexChanged);
             // 
             // AddItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(352, 454);
-            this.Controls.Add(button2);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(368, 454);
+            this.Controls.Add(this.cmbPartName);
+            this.Controls.Add(this.cmbItemBrand);
+            this.Controls.Add(btnAddItems);
+            this.Controls.Add(this.cmbV);
+            this.Controls.Add(this.cmbVBrand);
+            this.Controls.Add(this.cmbCountry);
             this.Controls.Add(this.cmbSup);
             this.Controls.Add(this.txtPid);
             this.Controls.Add(this.lblPid);
@@ -362,7 +377,6 @@
             this.Controls.Add(this.txtdate);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtCompanyNo);
-            this.Controls.Add(this.txtPartName);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -372,7 +386,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtItemBrand);
             this.Controls.Add(this.txtBarcode);
             this.Controls.Add(this.txtCost);
             this.Controls.Add(this.txtPartNumber);
@@ -391,7 +404,6 @@
         private System.Windows.Forms.TextBox txtPartNumber;
         private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.TextBox txtBarcode;
-        private System.Windows.Forms.TextBox txtItemBrand;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -401,7 +413,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtPartName;
         private System.Windows.Forms.TextBox txtCompanyNo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtdate;
@@ -410,8 +421,10 @@
         private System.Windows.Forms.Label lblPid;
         private System.Windows.Forms.TextBox txtPid;
         private System.Windows.Forms.ComboBox cmbSup;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cmbCountry;
+        private System.Windows.Forms.ComboBox cmbVBrand;
+        private System.Windows.Forms.ComboBox cmbV;
+        private System.Windows.Forms.ComboBox cmbItemBrand;
+        private System.Windows.Forms.ComboBox cmbPartName;
     }
 }
