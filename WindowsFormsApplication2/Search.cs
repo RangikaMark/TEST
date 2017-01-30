@@ -56,7 +56,7 @@ namespace AutoParts
             }
 
         }
-        void fill_combo_type(ComboBox combo, string Query, string c_name)
+       public void fill_combo_type(ComboBox combo,ComboBox toFillCombo, string Query, string c_name)
         {
 
 
@@ -71,7 +71,7 @@ namespace AutoParts
                 while (mdr.Read())
                 {
                     string bName = mdr.GetString(c_name);
-                    com_vehicle_type.Items.Add(bName);
+                    toFillCombo.Items.Add(bName);
                 }
                 mdr.Close();
                 connection.Close();
@@ -177,7 +177,7 @@ namespace AutoParts
             com_vehicle_type.Items.Clear();
             com_vehicle_type.Text = "";
             string Query = "SELECT vehicle_name FROM vehicle_type INNER JOIN vehicle_brand ON vehicle_brand.vehicle_brand_id = vehicle_type.vehicle_brand_id where vehicle_brand.brand_name = '";
-            fill_combo_type(com_brand, Query, "vehicle_name");
+            fill_combo_type(com_brand, com_vehicle_type, Query, "vehicle_name");
 
 
         }
