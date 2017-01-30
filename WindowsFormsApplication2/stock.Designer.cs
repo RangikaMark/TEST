@@ -30,6 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stock));
             this.stockgrid = new System.Windows.Forms.DataGridView();
+            this.barcode_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.part_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.part_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.company_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.selling_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtdate = new System.Windows.Forms.TextBox();
             this.txtbarcode = new System.Windows.Forms.TextBox();
             this.btnconfirm = new System.Windows.Forms.Button();
@@ -43,15 +50,7 @@
             this.cmbcompanypartno = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtpurchase_id = new System.Windows.Forms.TextBox();
-            this.btnAddStock = new System.Windows.Forms.Button();
             this.btnNewItem = new System.Windows.Forms.Button();
-            this.barcode_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.part_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.part_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.company_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.selling_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.stockgrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,158 +71,6 @@
             this.stockgrid.Size = new System.Drawing.Size(1042, 171);
             this.stockgrid.TabIndex = 0;
             this.stockgrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // txtdate
-            // 
-            this.txtdate.Location = new System.Drawing.Point(88, 22);
-            this.txtdate.Name = "txtdate";
-            this.txtdate.Size = new System.Drawing.Size(118, 20);
-            this.txtdate.TabIndex = 1;
-            // 
-            // txtbarcode
-            // 
-            this.txtbarcode.Location = new System.Drawing.Point(76, 104);
-            this.txtbarcode.Name = "txtbarcode";
-            this.txtbarcode.Size = new System.Drawing.Size(100, 20);
-            this.txtbarcode.TabIndex = 4;
-            this.txtbarcode.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            // 
-            // btnconfirm
-            // 
-            this.btnconfirm.Location = new System.Drawing.Point(967, 351);
-            this.btnconfirm.Name = "btnconfirm";
-            this.btnconfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnconfirm.TabIndex = 6;
-            this.btnconfirm.Text = "Confirm";
-            this.btnconfirm.UseVisualStyleBackColor = true;
-            this.btnconfirm.Click += new System.EventHandler(this.btnconfirm_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(24, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Date/Time";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(491, 111);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Company Number";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.Location = new System.Drawing.Point(219, 108);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Part Number";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label5.Location = new System.Drawing.Point(12, 104);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Barcode";
-            // 
-            // cmbSuppliers
-            // 
-            this.cmbSuppliers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbSuppliers.FormattingEnabled = true;
-            this.cmbSuppliers.Location = new System.Drawing.Point(315, 43);
-            this.cmbSuppliers.Name = "cmbSuppliers";
-            this.cmbSuppliers.Size = new System.Drawing.Size(298, 21);
-            this.cmbSuppliers.TabIndex = 12;
-            this.cmbSuppliers.SelectedIndexChanged += new System.EventHandler(this.cmbSuppliers_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label2.Location = new System.Drawing.Point(219, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Select the supplier";
-            // 
-            // cmbpartnumber
-            // 
-            this.cmbpartnumber.FormattingEnabled = true;
-            this.cmbpartnumber.Location = new System.Drawing.Point(315, 108);
-            this.cmbpartnumber.Name = "cmbpartnumber";
-            this.cmbpartnumber.Size = new System.Drawing.Size(121, 21);
-            this.cmbpartnumber.TabIndex = 14;
-            this.cmbpartnumber.SelectedIndexChanged += new System.EventHandler(this.cmbpartnumber_SelectedIndexChanged);
-            // 
-            // cmbcompanypartno
-            // 
-            this.cmbcompanypartno.FormattingEnabled = true;
-            this.cmbcompanypartno.Location = new System.Drawing.Point(612, 108);
-            this.cmbcompanypartno.Name = "cmbcompanypartno";
-            this.cmbcompanypartno.Size = new System.Drawing.Size(121, 21);
-            this.cmbcompanypartno.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label6.Location = new System.Drawing.Point(859, 22);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Purchase ID";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // txtpurchase_id
-            // 
-            this.txtpurchase_id.Location = new System.Drawing.Point(942, 22);
-            this.txtpurchase_id.Name = "txtpurchase_id";
-            this.txtpurchase_id.Size = new System.Drawing.Size(100, 20);
-            this.txtpurchase_id.TabIndex = 16;
-            this.txtpurchase_id.TextChanged += new System.EventHandler(this.txtpurchase_id_TextChanged);
-            // 
-            // btnAddStock
-            // 
-            this.btnAddStock.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddStock.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnAddStock.Location = new System.Drawing.Point(814, 108);
-            this.btnAddStock.Name = "btnAddStock";
-            this.btnAddStock.Size = new System.Drawing.Size(114, 23);
-            this.btnAddStock.TabIndex = 5;
-            this.btnAddStock.Text = "Add To The Stock";
-            this.btnAddStock.UseVisualStyleBackColor = false;
-            this.btnAddStock.Click += new System.EventHandler(this.btnAddStock_Click);
-            // 
-            // btnNewItem
-            // 
-            this.btnNewItem.BackColor = System.Drawing.Color.Transparent;
-            this.btnNewItem.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnNewItem.Location = new System.Drawing.Point(967, 108);
-            this.btnNewItem.Name = "btnNewItem";
-            this.btnNewItem.Size = new System.Drawing.Size(75, 23);
-            this.btnNewItem.TabIndex = 18;
-            this.btnNewItem.Text = "New Item";
-            this.btnNewItem.UseVisualStyleBackColor = false;
-            this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
             // 
             // barcode_number
             // 
@@ -268,6 +115,153 @@
             this.selling_price.ReadOnly = true;
             this.selling_price.Width = 150;
             // 
+            // txtdate
+            // 
+            this.txtdate.Location = new System.Drawing.Point(105, 22);
+            this.txtdate.Name = "txtdate";
+            this.txtdate.Size = new System.Drawing.Size(71, 20);
+            this.txtdate.TabIndex = 1;
+            this.txtdate.TextChanged += new System.EventHandler(this.txtdate_TextChanged);
+            // 
+            // txtbarcode
+            // 
+            this.txtbarcode.Location = new System.Drawing.Point(76, 104);
+            this.txtbarcode.Name = "txtbarcode";
+            this.txtbarcode.Size = new System.Drawing.Size(100, 20);
+            this.txtbarcode.TabIndex = 4;
+            this.txtbarcode.TextChanged += new System.EventHandler(this.txtbarcode_TextChanged);
+            // 
+            // btnconfirm
+            // 
+            this.btnconfirm.Location = new System.Drawing.Point(967, 351);
+            this.btnconfirm.Name = "btnconfirm";
+            this.btnconfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnconfirm.TabIndex = 6;
+            this.btnconfirm.Text = "Confirm";
+            this.btnconfirm.UseVisualStyleBackColor = true;
+            this.btnconfirm.Click += new System.EventHandler(this.btnconfirm_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.Location = new System.Drawing.Point(28, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Date/Time";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label3.Location = new System.Drawing.Point(491, 111);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Company Number";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label4.Location = new System.Drawing.Point(219, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Part Number";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label5.Location = new System.Drawing.Point(12, 104);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Barcode";
+            // 
+            // cmbSuppliers
+            // 
+            this.cmbSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSuppliers.FormattingEnabled = true;
+            this.cmbSuppliers.Location = new System.Drawing.Point(315, 43);
+            this.cmbSuppliers.Name = "cmbSuppliers";
+            this.cmbSuppliers.Size = new System.Drawing.Size(298, 21);
+            this.cmbSuppliers.TabIndex = 12;
+            this.cmbSuppliers.SelectedIndexChanged += new System.EventHandler(this.cmbSuppliers_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label2.Location = new System.Drawing.Point(219, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Select the supplier";
+            // 
+            // cmbpartnumber
+            // 
+            this.cmbpartnumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbpartnumber.FormattingEnabled = true;
+            this.cmbpartnumber.Location = new System.Drawing.Point(315, 108);
+            this.cmbpartnumber.Name = "cmbpartnumber";
+            this.cmbpartnumber.Size = new System.Drawing.Size(121, 21);
+            this.cmbpartnumber.TabIndex = 14;
+            this.cmbpartnumber.SelectedIndexChanged += new System.EventHandler(this.cmbpartnumber_SelectedIndexChanged);
+            this.cmbpartnumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
+            this.cmbpartnumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FALSE);
+            // 
+            // cmbcompanypartno
+            // 
+            this.cmbcompanypartno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbcompanypartno.FormattingEnabled = true;
+            this.cmbcompanypartno.Location = new System.Drawing.Point(612, 108);
+            this.cmbcompanypartno.Name = "cmbcompanypartno";
+            this.cmbcompanypartno.Size = new System.Drawing.Size(121, 21);
+            this.cmbcompanypartno.TabIndex = 15;
+            this.cmbcompanypartno.SelectedIndexChanged += new System.EventHandler(this.cmbcompanypartno_SelectedIndexChanged);
+            this.cmbcompanypartno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FALSE);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label6.Location = new System.Drawing.Point(860, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Purchase ID";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // txtpurchase_id
+            // 
+            this.txtpurchase_id.Location = new System.Drawing.Point(942, 22);
+            this.txtpurchase_id.Name = "txtpurchase_id";
+            this.txtpurchase_id.Size = new System.Drawing.Size(100, 20);
+            this.txtpurchase_id.TabIndex = 16;
+            this.txtpurchase_id.TextChanged += new System.EventHandler(this.txtpurchase_id_TextChanged);
+            // 
+            // btnNewItem
+            // 
+            this.btnNewItem.BackColor = System.Drawing.Color.Transparent;
+            this.btnNewItem.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnNewItem.Location = new System.Drawing.Point(796, 108);
+            this.btnNewItem.Name = "btnNewItem";
+            this.btnNewItem.Size = new System.Drawing.Size(75, 23);
+            this.btnNewItem.TabIndex = 18;
+            this.btnNewItem.Text = "New Item";
+            this.btnNewItem.UseVisualStyleBackColor = false;
+            this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
+            // 
             // Stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,7 +280,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnconfirm);
-            this.Controls.Add(this.btnAddStock);
             this.Controls.Add(this.txtbarcode);
             this.Controls.Add(this.txtdate);
             this.Controls.Add(this.stockgrid);
@@ -317,7 +310,6 @@
         private System.Windows.Forms.ComboBox cmbcompanypartno;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtpurchase_id;
-        private System.Windows.Forms.Button btnAddStock;
         private System.Windows.Forms.Button btnNewItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcode_number;
         private System.Windows.Forms.DataGridViewTextBoxColumn part_number;
