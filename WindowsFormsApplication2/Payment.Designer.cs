@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Button button2;
+            System.Windows.Forms.Button submit;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Payment));
             System.Windows.Forms.Button button1;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.paymentGrid = new System.Windows.Forms.DataGridView();
             this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partnoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,29 +57,29 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            button2 = new System.Windows.Forms.Button();
+            submit = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.paymentGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // button2
+            // submit
             // 
-            button2.BackColor = System.Drawing.Color.Transparent;
-            button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            button2.ForeColor = System.Drawing.Color.White;
-            button2.Location = new System.Drawing.Point(1102, 126);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(105, 97);
-            button2.TabIndex = 17;
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += new System.EventHandler(this.button2_Click);
+            submit.BackColor = System.Drawing.Color.Transparent;
+            submit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("submit.BackgroundImage")));
+            submit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            submit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            submit.FlatAppearance.BorderSize = 0;
+            submit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            submit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            submit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            submit.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            submit.ForeColor = System.Drawing.Color.White;
+            submit.Location = new System.Drawing.Point(1102, 126);
+            submit.Name = "submit";
+            submit.Size = new System.Drawing.Size(105, 97);
+            submit.TabIndex = 17;
+            submit.UseVisualStyleBackColor = false;
+            submit.Click += new System.EventHandler(this.submit_Click);
             // 
             // button1
             // 
@@ -102,18 +102,18 @@
             // paymentGrid
             // 
             this.paymentGrid.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Constantia", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Constantia", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.paymentGrid.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.paymentGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paymentGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paymentGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.paymentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paymentGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.barcodeCol,
@@ -124,26 +124,26 @@
             this.discountCol,
             this.priceCol,
             this.subtotalCol});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Comic Sans MS", 11F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.paymentGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Comic Sans MS", 11F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.paymentGrid.DefaultCellStyle = dataGridViewCellStyle8;
             this.paymentGrid.Location = new System.Drawing.Point(41, 109);
             this.paymentGrid.Name = "paymentGrid";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paymentGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentGrid.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paymentGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.paymentGrid.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.paymentGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.paymentGrid.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,7 +212,7 @@
             this.totalLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.totalLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLbl.ForeColor = System.Drawing.Color.Red;
-            this.totalLbl.Location = new System.Drawing.Point(660, 437);
+            this.totalLbl.Location = new System.Drawing.Point(660, 435);
             this.totalLbl.Name = "totalLbl";
             this.totalLbl.Size = new System.Drawing.Size(400, 50);
             this.totalLbl.TabIndex = 18;
@@ -258,7 +258,6 @@
             // 
             // barcodeTxt
             // 
-            this.barcodeTxt.Enabled = false;
             this.barcodeTxt.Location = new System.Drawing.Point(137, 53);
             this.barcodeTxt.Name = "barcodeTxt";
             this.barcodeTxt.Size = new System.Drawing.Size(213, 20);
@@ -365,7 +364,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(button1);
             this.Controls.Add(this.totalLbl);
-            this.Controls.Add(button2);
+            this.Controls.Add(submit);
             this.Controls.Add(this.paymentGrid);
             this.MinimizeBox = false;
             this.Name = "Payment";

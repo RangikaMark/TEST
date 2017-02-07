@@ -15,6 +15,7 @@ namespace AutoParts
         public MainMenu()
         {
             InitializeComponent();
+            openInPanel(new Payment());
         }
 
         private void openInPanel(Form form)
@@ -58,6 +59,16 @@ namespace AutoParts
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
         {
 
         }
