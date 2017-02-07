@@ -111,7 +111,34 @@ namespace AutoParts
             }
 
         }
+        public void checklist(string colname,string tablename,CheckedListBox checklistbox) {
 
+            connection.Open();
+            string bQuery = "SELECT "+colname+" from "+tablename;
+            MySqlCommand command = new MySqlCommand(bQuery, connection);
+            MySqlDataReader mdr;
+
+            try
+            {
+                mdr = command.ExecuteReader();
+
+                while (mdr.Read())
+                {
+                    string bName = mdr.GetString(colname);
+                    checklistbox.Items.Add(bName);
+                }
+                mdr.Close();
+                connection.Close();
+
+            }
+            catch
+             (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
 
 
         public Search()
@@ -126,29 +153,7 @@ namespace AutoParts
             string cQuery = "SELECT country_name FROM country";
             select_query(cQuery, "country_name", com_made_in);
 
-            connection.Open();
-            string bQuery = "SELECT part_type_name FROM part_type";
-            MySqlCommand command = new MySqlCommand(bQuery, connection);
-            MySqlDataReader mdr;
-
-            try
-            {
-                mdr = command.ExecuteReader();
-
-                while (mdr.Read())
-                {
-                    string bName = mdr.GetString("part_type_name");
-                    part_type.Items.Add(bName);
-                }
-                mdr.Close();
-                connection.Close();
-
-            }
-            catch
-             (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            checklist("part_type_name", "part_type", part_type);
 
 
         }
@@ -359,7 +364,7 @@ namespace AutoParts
     
     private void com_vehicle_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // 
+          
 
 
         }

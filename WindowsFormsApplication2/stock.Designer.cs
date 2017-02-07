@@ -51,6 +51,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtpurchase_id = new System.Windows.Forms.TextBox();
             this.btnNewItem = new System.Windows.Forms.Button();
+            this.cmbItemBrand = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chkclear = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.stockgrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,7 +161,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(491, 111);
+            this.label3.Location = new System.Drawing.Point(423, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 9;
@@ -169,7 +172,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.Location = new System.Drawing.Point(219, 108);
+            this.label4.Location = new System.Drawing.Point(194, 107);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
             this.label4.TabIndex = 10;
@@ -211,7 +214,7 @@
             // 
             this.cmbpartnumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbpartnumber.FormattingEnabled = true;
-            this.cmbpartnumber.Location = new System.Drawing.Point(315, 108);
+            this.cmbpartnumber.Location = new System.Drawing.Point(279, 104);
             this.cmbpartnumber.Name = "cmbpartnumber";
             this.cmbpartnumber.Size = new System.Drawing.Size(121, 21);
             this.cmbpartnumber.TabIndex = 14;
@@ -223,7 +226,7 @@
             // 
             this.cmbcompanypartno.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbcompanypartno.FormattingEnabled = true;
-            this.cmbcompanypartno.Location = new System.Drawing.Point(612, 108);
+            this.cmbcompanypartno.Location = new System.Drawing.Point(535, 105);
             this.cmbcompanypartno.Name = "cmbcompanypartno";
             this.cmbcompanypartno.Size = new System.Drawing.Size(121, 21);
             this.cmbcompanypartno.TabIndex = 15;
@@ -254,7 +257,7 @@
             // 
             this.btnNewItem.BackColor = System.Drawing.Color.Transparent;
             this.btnNewItem.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnNewItem.Location = new System.Drawing.Point(796, 108);
+            this.btnNewItem.Location = new System.Drawing.Point(967, 108);
             this.btnNewItem.Name = "btnNewItem";
             this.btnNewItem.Size = new System.Drawing.Size(75, 23);
             this.btnNewItem.TabIndex = 18;
@@ -262,12 +265,49 @@
             this.btnNewItem.UseVisualStyleBackColor = false;
             this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
             // 
+            // cmbItemBrand
+            // 
+            this.cmbItemBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbItemBrand.FormattingEnabled = true;
+            this.cmbItemBrand.Location = new System.Drawing.Point(767, 105);
+            this.cmbItemBrand.Name = "cmbItemBrand";
+            this.cmbItemBrand.Size = new System.Drawing.Size(121, 21);
+            this.cmbItemBrand.TabIndex = 19;
+            this.cmbItemBrand.SelectedIndexChanged += new System.EventHandler(this.cmbItemBrand_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label7.Location = new System.Drawing.Point(679, 111);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Item Brand";
+            // 
+            // chkclear
+            // 
+            this.chkclear.AutoSize = true;
+            this.chkclear.BackColor = System.Drawing.Color.Transparent;
+            this.chkclear.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.chkclear.Location = new System.Drawing.Point(808, 140);
+            this.chkclear.Name = "chkclear";
+            this.chkclear.Size = new System.Drawing.Size(187, 17);
+            this.chkclear.TabIndex = 21;
+            this.chkclear.Text = "Do you want to clear the selection";
+            this.chkclear.UseVisualStyleBackColor = false;
+            this.chkclear.CheckedChanged += new System.EventHandler(this.chkclear_CheckedChanged);
+            // 
             // Stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1243, 511);
+            this.Controls.Add(this.chkclear);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.cmbItemBrand);
             this.Controls.Add(this.btnNewItem);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtpurchase_id);
@@ -318,5 +358,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn selling_price;
+        private System.Windows.Forms.ComboBox cmbItemBrand;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox chkclear;
     }
 }

@@ -15,29 +15,37 @@ namespace AutoParts
     {
         MySqlConnection connection = new MySqlConnection("datasource=localhost;Database=hashini_auto;port=3306;username=root;password=");
         List<string> barcodeNumbers = new List<string>();
-        List<string> barcodeTable = new List<string>();
+        //  List<string> barcodeTable = new List<string>();
         string cmbpartValue;
         string cmbcomValue;
-        public void chkbarcode()
+        string cmbItemValue;
+        string itemDetailsId;
+
+        public void cursor(ComboBox combo1, ComboBox combo2, ComboBox combo3)
         {
-            connection.Open();
-            string bquery = "select barcode from hashini_auto.item_details";
-            MySqlCommand bcmd = new MySqlCommand(bquery, connection);
-            MySqlDataReader bmdr;
-            bmdr = bcmd.ExecuteReader();
-            while (bmdr.Read()) ;
-            { 
-            string barcode = bmdr.GetString("barcode");
-            barcodeTable.Add(txtbarcode.Text);
-        } bmdr.Close();
-            connection.Close();
-            
+            if (combo1.Text != "")
+            {
+                combo2.Focus();
+
+                if (combo2.Text != "")
+                {
+                    combo3.Focus();
+                }
+                if (combo3.Text != "")
+                {
+                    txtbarcode.Focus();
+                }
+            }
+            else
+            {
+                combo1.Focus();
+            }
         }
 
-        public string purchase_id(string colcon,string col,string table) {
+        public string purchase_id(string colcon, string col, string table) {
 
             connection.Open();
-            string getpurcahse_id = "SELECT "+colcon+" FROM "+table+" ORDER BY "+col+" DESC LIMIT 1";
+            string getpurcahse_id = "SELECT " + colcon + " FROM " + table + " ORDER BY " + col + " DESC LIMIT 1";
             MySqlCommand pid = new MySqlCommand(getpurcahse_id, connection);
             MySqlDataReader mdr;
             mdr = pid.ExecuteReader();
@@ -54,6 +62,8 @@ namespace AutoParts
             cmbpartnumber.Text = "";
             cmbpartnumber.SelectedItem = null;
             cmbcompanypartno.SelectedItem = null;
+            cmbSuppliers.SelectedItem = null;
+            cmbItemBrand.Text = "";
         }
         bool IsDigitsOnly(string str)
         {
@@ -73,32 +83,52 @@ namespace AutoParts
             txtbarcode.KeyDown += new KeyEventHandler(this.txtbarcodeKeyPress);
             cmbcompanypartno.KeyDown += new KeyEventHandler(this.cmbKeyDown);
             cmbpartnumber.KeyDown += new KeyEventHandler(this.cmbKeyDown);
+            cmbItemBrand.KeyDown += new KeyEventHandler(this.cmbKeyDown);
         }
         private void txtbarcodeKeyPress(object sender, KeyEventArgs e)
+
         {
-            chkbarcode();
 
             if (e.KeyCode == Keys.Enter)
             {
-                if (!string.IsNullOrWhiteSpace(txtbarcode.Text) || IsDigitsOnly(txtbarcode.Text)|| !string.IsNullOrWhiteSpace(cmbcompanypartno.Text)|| !string.IsNullOrWhiteSpace(cmbpartnumber.Text))
+                if (!string.IsNullOrWhiteSpace(txtbarcode.Text) || IsDigitsOnly(txtbarcode.Text) || !string.IsNullOrWhiteSpace(cmbcompanypartno.Text) || !string.IsNullOrWhiteSpace(cmbpartnumber.Text))
                 {
-                    if (barcodeNumbers.Contains(txtbarcode.Text) || barcodeTable.Contains(txtbarcode.Text))
+                    MessageBox.Show(txtbarcode.Text);
+                    string getb = "SELECT * FROM item where barcode ='" + txtbarcode.Text + "'";
+                    MySqlCommand Barcode = new MySqlCommand(getb, connection);
+                    MySqlDataReader bmdr;
+                    connection.Open();
+                    bmdr = Barcode.ExecuteReader();
+                    connection.Close();
+                    if (bmdr != null)
+                    {
+                        MessageBox.Show("Entered Barcode is already input ");
+                        txtbarcode.Text = "";
+
+                    }
+                    else if (barcodeNumbers.Contains(txtbarcode.Text))
                     {
                         MessageBox.Show("Entered Barcode is already in the checkout table.");
+                        txtbarcode.Text = "";
                     }
 
-                    else
+                    else if (cmbcompanypartno.Text == "" || cmbpartnumber.Text == "" || cmbItemBrand.Text == "" || cmbSuppliers.Text == "")
                     {
-                        connection.Open();
+                        MessageBox.Show("Please Fill All Fields");
+                        txtbarcode.Text = "";
+
+                        clear();
+                    }
+                    else {
                         string partno;
                         string companyPartNo;
                         partno = cmbpartnumber.SelectedItem.ToString();
                         companyPartNo = cmbcompanypartno.SelectedItem.ToString();
 
-                        string query = "Select part_number,cost,part_type.part_type_name,item_details.company_part_no from item_details inner join cost on cost.partNumber=item_details.part_number inner join part_type on part_type.part_type_id=item_details.part_type_id where item_details.part_number='" + partno + "' and item_details.company_part_no='" + companyPartNo + "'";
+                        string query = "Select part_number, cost ,part_type.part_type_name, item_details.company_part_no,items_brand.items_brand_name,item_details.items_details_id from item_details inner join items_brand on items_brand.items_brand_id=items_brand.items_brand_id inner join cost on cost.partNumber=item_details.part_number inner join part_type on part_type.part_type_id=item_details.part_type_id where item_details.part_number='" + partno + "' and item_details.company_part_no='" + companyPartNo + "'and items_brand.items_brand_name='" + cmbItemBrand.Text + "'";
                         MySqlCommand command = new MySqlCommand(query, connection);
                         MySqlDataReader mdr;
-
+                        connection.Open();
                         mdr = command.ExecuteReader();
                         mdr.Read();
 
@@ -109,11 +139,12 @@ namespace AutoParts
                         string comPartNo = mdr.GetString("company_part_no");
                         int sellingPricein = mdr.GetInt16("cost");
                         int sellingPrice = (sellingPricein + (sellingPricein * 35) / 100);
+                        itemDetailsId = mdr.GetString("items_details_id");
                         barcodeNumbers.Add(txtbarcode.Text);
                         //this.stockgrid.Rows.Add(txtbarcode.Text, partNumber, partTypeName, companyPartNo, cost, sellingPrice);
 
                         mdr.Close();
-                        string count_query = "select count(*) from item_details where part_number='" + partNumber + "' AND company_part_no= '" + comPartNo + "'";
+                        string count_query = "select count(*) from item_details inner join items_brand on items_brand.items_brand_id=items_brand.items_brand_id where part_number='" + partNumber + "' AND company_part_no= '" + comPartNo + "' AND items_brand.items_brand_name = '" + cmbItemBrand.Text + "'";
                         MySqlCommand countCmd = new MySqlCommand(count_query, connection);
                         MySqlDataReader cmdr;
                         cmdr = countCmd.ExecuteReader();
@@ -122,15 +153,18 @@ namespace AutoParts
                         this.stockgrid.Rows.Add(txtbarcode.Text, partNumber, partTypeName, companyPartNo, count, cost, sellingPrice);
                         cmdr.Close();
                         connection.Close();
-                        clear();
+                        txtbarcode.Text = "";
+                        //
                     }
-                    
                 }
                 else
                 {
                     MessageBox.Show("Enter the Barcode correctly");
+                    txtbarcode.Text = "";
                 }
             }
+
+
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -139,7 +173,7 @@ namespace AutoParts
 
         private void txtbarcode_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -149,9 +183,8 @@ namespace AutoParts
 
         private void cmbSuppliers_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
+          cursor(cmbpartnumber, cmbcompanypartno, cmbItemBrand);
+    }
         private void Stock_Load(object sender, EventArgs e)
         {
             Search fill = new Search();
@@ -162,6 +195,8 @@ namespace AutoParts
             fillpart.fill_combo("part_number", "item_details", cmbpartnumber);
             Search fillcompart = new Search();
             fillcompart.fill_combo("company_part_no", "item_details", cmbcompanypartno);
+            Search fillcomItemBrand = new Search();
+            fillcomItemBrand.fill_combo("items_brand_name", "items_brand", cmbItemBrand);
             txtpurchase_id.Text =purchase_id("purchase_item_id + 1", "purchase_item_id","purchase_item");
         }
 
@@ -173,6 +208,8 @@ namespace AutoParts
         private void cmbpartnumber_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbpartValue = cmbpartnumber.Text;
+            cmbcompanypartno.Focus();
+            cursor(cmbSuppliers, cmbcompanypartno, cmbItemBrand);
         }
 
         private void btnAddStock_Click(object sender, EventArgs e)
@@ -190,25 +227,6 @@ namespace AutoParts
             // connection.Open();
             for (int i = 0; i < ((stockgrid.Rows.Count) - 1); i++)
             {
-                //connection.Open();
-
-                string selectQuery = "select part_type.part_type_id,supplier.supplier_id,item_details.part_number,country.country_id,item_details.items_brand_id,vehicle_brand.vehicle_brand_id,vehicle_type.vehicle_type_id,item_details.company_part_no from item_details inner join part_type on item_details.part_type_id = part_type.part_type_id inner join supplier on item_details.supplier_id=supplier.supplier_id inner join vehicle_brand on item_details.vehicle_brand_id = vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id = item_details.vehicle_type_id inner join items_brand on item_details.items_brand_id=items_brand.items_brand_id inner join country on item_details.country_id = country.country_id inner join cost on cost.partNumber=item_details.part_number where item_details.part_number = '" + stockgrid.Rows[i].Cells["part_number"].Value + "' AND item_details.company_part_no = '" + stockgrid.Rows[i].Cells["company_number"].Value + "'";
-                MySqlCommand command = new MySqlCommand(selectQuery, connection);
-                connection.Open();
-                MySqlDataReader mdr;
-                mdr = command.ExecuteReader();
-                mdr.Read();
-                string part_type_id = mdr.GetString("part_type_id");
-                string part_number = mdr.GetString("part_number");
-                string country_id = mdr.GetString("country_id");
-                string vehicle_brand_id = mdr.GetString("vehicle_brand_id");
-                string vehicle_type_id = mdr.GetString("vehicle_type_id");
-                string supplier_id = mdr.GetString("supplier_id");
-                string item_brand_id = mdr.GetString("items_brand_id");
-                string companyPartNo = mdr.GetString("company_part_no");
-                string cost = mdr.GetString("part_number");
-                mdr.Close();
-                connection.Close();
                 string costmatch = "select cost.cost,cost.cost_id from cost where partNumber='" + stockgrid.Rows[i].Cells["part_number"].Value + "'and company_part_no='" + stockgrid.Rows[i].Cells["company_number"].Value + "'";
                 MySqlCommand cmdcost = new MySqlCommand(costmatch, connection);
                 connection.Open();
@@ -223,10 +241,11 @@ namespace AutoParts
                 if (checkCost == stockgrid.Rows[i].Cells["cost"].Value.ToString())
                 {
 
-                    string insertQuery = "INSERT INTO `hashini_auto`.`item_details` (`part_number`, `cost_price`, `barcode`, `supplier_id`,`purchase_id`, `vehicle_type_id`, `vehicle_brand_id`,`part_type_id`, `country_id`, `items_brand_id`, `company_part_no`) VALUES ('" + part_number + "','" + costId + "','" + stockgrid.Rows[i].Cells["barcode_number"].Value + "','" + supplier_id + "','300','" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
-                    MySqlCommand insercommand = new MySqlCommand(insertQuery, connection);
+
+                    string barcodeQuery = "INSERT INTO `hashini_auto`.`item` (`barcode`, `items_detailId`, `status_id`,`purchase_id`) VALUES ('" + stockgrid.Rows[i].Cells["barcode_number"].Value + "', '" + itemDetailsId + "')','1','" + txtpurchase_id.Text + "') "; //'" + supplier_id + "'," + txtpurchase_id.Text + ",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
+                    MySqlCommand barcodecommand = new MySqlCommand(barcodeQuery, connection);
                     connection.Open();
-                    insercommand.ExecuteNonQuery();
+                    barcodecommand.ExecuteNonQuery();
                     MessageBox.Show("data entered Succesfully");
                     connection.Close();
                 }
@@ -238,11 +257,11 @@ namespace AutoParts
                     upquery.ExecuteNonQuery();
                     MessageBox.Show("data cost updated Succesfully");
                     connection.Close();
-                    string purchaseID =purchase_id("purchase_item_id", "purchase_item_id", "purchase_item");
-                    string insertQuery = "INSERT INTO `hashini_auto`.`item_details` (`part_number`, `cost_price`, `barcode`, `supplier_id`,`purchase_id`, `vehicle_type_id`, `vehicle_brand_id`,`part_type_id`, `country_id`, `items_brand_id`, `company_part_no`) VALUES ('" + part_number + "','" + cost + "','" + stockgrid.Rows[i].Cells["barcode_number"].Value + "','" + supplier_id + "','"+purchaseID+",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
-                    MySqlCommand insercommand = new MySqlCommand(insertQuery, connection);
+
+                    string barcodeQuery = "INSERT INTO `hashini_auto`.`item` (`barcode`, `item_detailedId`, `status_id`,`purchase_id`) VALUES ('" + stockgrid.Rows[i].Cells["barcode_number"].Value + ", (select items_details_id from item_details where part_number='" + stockgrid.Rows[i].Cells["part_number"] + "' and ' item_details.item_details_id= '" + itemDetailsId + "'),'1','" + txtpurchase_id.Text + "') "; //'" + supplier_id + "'," + txtpurchase_id.Text + ",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
+                    MySqlCommand barcodecommand = new MySqlCommand(barcodeQuery, connection);
                     connection.Open();
-                    insercommand.ExecuteNonQuery();
+                    barcodecommand.ExecuteNonQuery();
                     MessageBox.Show("data entered Succesfully");
                     connection.Close();
 
@@ -255,7 +274,7 @@ namespace AutoParts
             purchasecmd.ExecuteNonQuery();
             MessageBox.Show("User crested Succesfully");
             connection.Close();
-
+         
         }
 
         private void btnNewItem_Click(object sender, EventArgs e)
@@ -334,6 +353,7 @@ namespace AutoParts
             if (e.KeyCode == Keys.Enter) {
                 cmbcompanypartno.Text = cmbcomValue;
                 cmbpartnumber.Text = cmbpartValue;
+                cmbItemBrand.Text = cmbItemValue;
                txtbarcode.Focus();
             }
         }
@@ -341,6 +361,24 @@ namespace AutoParts
         private void cmbcompanypartno_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbcomValue = cmbcompanypartno.Text;
+            cmbItemBrand.Focus();
+            cursor(cmbSuppliers, cmbpartnumber, cmbItemBrand);
+        }
+
+        private void cmbItemBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbItemValue = cmbItemBrand.Text;
+            txtbarcode.Focus();
+            cursor(cmbSuppliers, cmbpartnumber, cmbcompanypartno);
+        }
+
+        private void chkclear_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkclear.Checked == true)
+            {
+                clear();
+                chkclear.Checked = false;
+            }
         }
     }
 }

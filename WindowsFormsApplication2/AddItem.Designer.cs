@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddItem));
             this.txtPartNumber = new System.Windows.Forms.TextBox();
             this.txtCost = new System.Windows.Forms.TextBox();
-            this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,15 +44,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtdate = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.lblPid = new System.Windows.Forms.Label();
-            this.txtPid = new System.Windows.Forms.TextBox();
             this.cmbSup = new System.Windows.Forms.ComboBox();
             this.cmbCountry = new System.Windows.Forms.ComboBox();
             this.cmbVBrand = new System.Windows.Forms.ComboBox();
-            this.cmbV = new System.Windows.Forms.ComboBox();
             this.cmbItemBrand = new System.Windows.Forms.ComboBox();
             this.cmbPartName = new System.Windows.Forms.ComboBox();
+            this.chklistVehicle = new System.Windows.Forms.CheckedListBox();
+            this.chkotherB = new System.Windows.Forms.CheckBox();
             btnAddItems = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -70,7 +67,7 @@
             btnAddItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnAddItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btnAddItems.ForeColor = System.Drawing.Color.White;
-            btnAddItems.Location = new System.Drawing.Point(271, 246);
+            btnAddItems.Location = new System.Drawing.Point(630, 386);
             btnAddItems.Name = "btnAddItems";
             btnAddItems.Size = new System.Drawing.Size(69, 56);
             btnAddItems.TabIndex = 33;
@@ -85,7 +82,7 @@
             this.txtPartNumber.Size = new System.Drawing.Size(100, 20);
             this.txtPartNumber.TabIndex = 0;
             this.txtPartNumber.TextChanged += new System.EventHandler(this.txtPartNumber_TextChanged);
-            this.txtPartNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
+            this.txtPartNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPartNumber_KeyDown);
             // 
             // txtCost
             // 
@@ -95,29 +92,6 @@
             this.txtCost.Size = new System.Drawing.Size(100, 20);
             this.txtCost.TabIndex = 1;
             this.txtCost.TextChanged += new System.EventHandler(this.txtCost_TextChanged);
-            this.txtCost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
-            // 
-            // txtBarcode
-            // 
-            this.txtBarcode.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtBarcode.Location = new System.Drawing.Point(139, 83);
-            this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(100, 20);
-            this.txtBarcode.TabIndex = 2;
-            this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.ForeColor = System.Drawing.SystemColors.Info;
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Location = new System.Drawing.Point(17, 83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Barcode";
             // 
             // label2
             // 
@@ -126,11 +100,12 @@
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.ForeColor = System.Drawing.SystemColors.Info;
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label2.Location = new System.Drawing.Point(17, 202);
+            this.label2.Location = new System.Drawing.Point(516, 126);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Part Name";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -139,7 +114,7 @@
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.ForeColor = System.Drawing.SystemColors.Info;
             this.label3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label3.Location = new System.Drawing.Point(18, 246);
+            this.label3.Location = new System.Drawing.Point(318, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 6;
@@ -180,7 +155,7 @@
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label6.ForeColor = System.Drawing.SystemColors.Info;
             this.label6.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label6.Location = new System.Drawing.Point(17, 351);
+            this.label6.Location = new System.Drawing.Point(313, 280);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 13);
             this.label6.TabIndex = 9;
@@ -193,7 +168,7 @@
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.ForeColor = System.Drawing.SystemColors.Info;
             this.label7.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label7.Location = new System.Drawing.Point(18, 279);
+            this.label7.Location = new System.Drawing.Point(51, 189);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 10;
@@ -206,7 +181,7 @@
             this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label8.ForeColor = System.Drawing.SystemColors.Info;
             this.label8.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label8.Location = new System.Drawing.Point(18, 168);
+            this.label8.Location = new System.Drawing.Point(267, 128);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 13);
             this.label8.TabIndex = 11;
@@ -219,7 +194,7 @@
             this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label9.ForeColor = System.Drawing.SystemColors.Info;
             this.label9.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label9.Location = new System.Drawing.Point(18, 316);
+            this.label9.Location = new System.Drawing.Point(18, 283);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 13);
             this.label9.TabIndex = 12;
@@ -228,12 +203,12 @@
             // txtCompanyNo
             // 
             this.txtCompanyNo.BackColor = System.Drawing.SystemColors.Menu;
-            this.txtCompanyNo.Location = new System.Drawing.Point(139, 161);
+            this.txtCompanyNo.Location = new System.Drawing.Point(388, 121);
             this.txtCompanyNo.Name = "txtCompanyNo";
             this.txtCompanyNo.Size = new System.Drawing.Size(100, 20);
             this.txtCompanyNo.TabIndex = 16;
             this.txtCompanyNo.TextChanged += new System.EventHandler(this.txtCompanyNo_TextChanged);
-            this.txtCompanyNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbKeyDown);
+            this.txtCompanyNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCompanyPartNo_KeyDown);
             // 
             // label10
             // 
@@ -242,7 +217,7 @@
             this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label10.ForeColor = System.Drawing.SystemColors.Info;
             this.label10.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label10.Location = new System.Drawing.Point(18, 386);
+            this.label10.Location = new System.Drawing.Point(303, 192);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(58, 13);
             this.label10.TabIndex = 18;
@@ -271,19 +246,6 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "Date";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label12.ForeColor = System.Drawing.SystemColors.Info;
-            this.label12.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label12.Location = new System.Drawing.Point(127, 43);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 13);
-            this.label12.TabIndex = 24;
-            this.label12.Text = "Purchase ID";
-            // 
             // lblPid
             // 
             this.lblPid.AutoSize = true;
@@ -296,26 +258,19 @@
             this.lblPid.Size = new System.Drawing.Size(0, 13);
             this.lblPid.TabIndex = 25;
             // 
-            // txtPid
-            // 
-            this.txtPid.Location = new System.Drawing.Point(199, 40);
-            this.txtPid.Name = "txtPid";
-            this.txtPid.Size = new System.Drawing.Size(40, 20);
-            this.txtPid.TabIndex = 28;
-            // 
             // cmbSup
             // 
             this.cmbSup.FormattingEnabled = true;
-            this.cmbSup.Location = new System.Drawing.Point(139, 238);
+            this.cmbSup.Location = new System.Drawing.Point(388, 61);
             this.cmbSup.Name = "cmbSup";
-            this.cmbSup.Size = new System.Drawing.Size(100, 21);
+            this.cmbSup.Size = new System.Drawing.Size(185, 21);
             this.cmbSup.TabIndex = 29;
             this.cmbSup.SelectedIndexChanged += new System.EventHandler(this.cmbSup_SelectedIndexChanged);
             // 
             // cmbCountry
             // 
             this.cmbCountry.FormattingEnabled = true;
-            this.cmbCountry.Location = new System.Drawing.Point(139, 271);
+            this.cmbCountry.Location = new System.Drawing.Point(139, 189);
             this.cmbCountry.Name = "cmbCountry";
             this.cmbCountry.Size = new System.Drawing.Size(100, 21);
             this.cmbCountry.TabIndex = 30;
@@ -324,25 +279,16 @@
             // cmbVBrand
             // 
             this.cmbVBrand.FormattingEnabled = true;
-            this.cmbVBrand.Location = new System.Drawing.Point(139, 308);
+            this.cmbVBrand.Location = new System.Drawing.Point(139, 280);
             this.cmbVBrand.Name = "cmbVBrand";
             this.cmbVBrand.Size = new System.Drawing.Size(100, 21);
             this.cmbVBrand.TabIndex = 31;
             this.cmbVBrand.SelectedIndexChanged += new System.EventHandler(this.cmbVBrand_SelectedIndexChanged);
             // 
-            // cmbV
-            // 
-            this.cmbV.FormattingEnabled = true;
-            this.cmbV.Location = new System.Drawing.Point(139, 343);
-            this.cmbV.Name = "cmbV";
-            this.cmbV.Size = new System.Drawing.Size(100, 21);
-            this.cmbV.TabIndex = 32;
-            this.cmbV.SelectedIndexChanged += new System.EventHandler(this.cmbV_SelectedIndexChanged);
-            // 
             // cmbItemBrand
             // 
             this.cmbItemBrand.FormattingEnabled = true;
-            this.cmbItemBrand.Location = new System.Drawing.Point(139, 378);
+            this.cmbItemBrand.Location = new System.Drawing.Point(388, 186);
             this.cmbItemBrand.Name = "cmbItemBrand";
             this.cmbItemBrand.Size = new System.Drawing.Size(100, 21);
             this.cmbItemBrand.TabIndex = 34;
@@ -351,28 +297,49 @@
             // cmbPartName
             // 
             this.cmbPartName.FormattingEnabled = true;
-            this.cmbPartName.Location = new System.Drawing.Point(139, 202);
+            this.cmbPartName.Location = new System.Drawing.Point(599, 120);
             this.cmbPartName.Name = "cmbPartName";
             this.cmbPartName.Size = new System.Drawing.Size(100, 21);
             this.cmbPartName.TabIndex = 35;
             this.cmbPartName.SelectedIndexChanged += new System.EventHandler(this.cmbPartName_SelectedIndexChanged);
+            // 
+            // chklistVehicle
+            // 
+            this.chklistVehicle.FormattingEnabled = true;
+            this.chklistVehicle.Location = new System.Drawing.Point(388, 245);
+            this.chklistVehicle.Name = "chklistVehicle";
+            this.chklistVehicle.Size = new System.Drawing.Size(120, 94);
+            this.chklistVehicle.TabIndex = 36;
+            this.chklistVehicle.SelectedIndexChanged += new System.EventHandler(this.chklistVehicle_SelectedIndexChanged);
+            // 
+            // chkotherB
+            // 
+            this.chkotherB.AutoSize = true;
+            this.chkotherB.BackColor = System.Drawing.Color.Transparent;
+            this.chkotherB.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.chkotherB.Location = new System.Drawing.Point(570, 276);
+            this.chkotherB.Name = "chkotherB";
+            this.chkotherB.Size = new System.Drawing.Size(123, 17);
+            this.chkotherB.TabIndex = 38;
+            this.chkotherB.Text = "Add Another Vehicle";
+            this.chkotherB.UseVisualStyleBackColor = false;
+            this.chkotherB.CheckedChanged += new System.EventHandler(this.chkotherB_CheckedChanged);
             // 
             // AddItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(368, 454);
+            this.ClientSize = new System.Drawing.Size(775, 454);
+            this.Controls.Add(this.chkotherB);
+            this.Controls.Add(this.chklistVehicle);
             this.Controls.Add(this.cmbPartName);
             this.Controls.Add(this.cmbItemBrand);
             this.Controls.Add(btnAddItems);
-            this.Controls.Add(this.cmbV);
             this.Controls.Add(this.cmbVBrand);
             this.Controls.Add(this.cmbCountry);
             this.Controls.Add(this.cmbSup);
-            this.Controls.Add(this.txtPid);
             this.Controls.Add(this.lblPid);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtdate);
             this.Controls.Add(this.label10);
@@ -385,8 +352,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtBarcode);
             this.Controls.Add(this.txtCost);
             this.Controls.Add(this.txtPartNumber);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -403,8 +368,6 @@
 
         private System.Windows.Forms.TextBox txtPartNumber;
         private System.Windows.Forms.TextBox txtCost;
-        private System.Windows.Forms.TextBox txtBarcode;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -417,14 +380,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtdate;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblPid;
-        private System.Windows.Forms.TextBox txtPid;
         private System.Windows.Forms.ComboBox cmbSup;
         private System.Windows.Forms.ComboBox cmbCountry;
         private System.Windows.Forms.ComboBox cmbVBrand;
-        private System.Windows.Forms.ComboBox cmbV;
         private System.Windows.Forms.ComboBox cmbItemBrand;
         private System.Windows.Forms.ComboBox cmbPartName;
+        private System.Windows.Forms.CheckedListBox chklistVehicle;
+        private System.Windows.Forms.CheckBox chkotherB;
     }
 }
