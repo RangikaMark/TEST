@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using AutoParts.Properties;
 
 namespace AutoParts
 {
@@ -15,10 +16,10 @@ namespace AutoParts
     public partial class Search : Form
     {
         MySqlConnection connection = new MySqlConnection("datasource=localhost;Database=hashini_auto;port=3306;username=root;password=");
-
-        string brand;
-        string type;
-        string madeIn;
+        string item_id;
+        string brandID;
+        string vehicleID;
+        string country_id;
         string query;
         string company;
         string partTypeName;
@@ -26,8 +27,7 @@ namespace AutoParts
         string countries;
         string quantity;
         string costPrice;
-        string vName;
-        string bName;
+       
 
 
         public void fill_combo(string c_name,string t_name,ComboBox combo)
@@ -87,7 +87,7 @@ namespace AutoParts
 
         }
 
-        void select_query(String sQuery, string getString, ComboBox combo)
+     public    void select_query(String sQuery, string getString, ComboBox combo)
         {
 
             connection.Open();
@@ -184,21 +184,32 @@ namespace AutoParts
             string Query = "SELECT vehicle_name FROM vehicle_type INNER JOIN vehicle_brand ON vehicle_brand.vehicle_brand_id = vehicle_type.vehicle_brand_id where vehicle_brand.brand_name = '";
             fill_combo_type(com_brand, com_vehicle_type, Query, "vehicle_name");
 
-
+            this.searchGrid.DataSource = null;
+            this.searchGrid.Rows.Clear();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
 
-            brand = com_brand.SelectedItem.ToString();
-            type = com_vehicle_type.SelectedItem.ToString();
+            string brand = com_brand.SelectedItem.ToString();
+            AddItem selectbrandID = new AddItem();
+            brandID = selectbrandID.select_id("vehicle_brand", "vehicle_brand_id", "brand_name", brand);
+            string type = com_vehicle_type.SelectedItem.ToString();
+            AddItem selectVehicleId = new AddItem();
+            vehicleID = selectVehicleId.select_id("vehicle_type", "vehicle_type_id", "vehicle_name", type);
+
+
+
             if (com_made_in.SelectedItem == null)
             {
-                madeIn = "";
+                country_id = "";
             }
             else
             {
-                madeIn = com_made_in.SelectedItem.ToString();
+                string madeIn = com_made_in.SelectedItem.ToString();
+                AddItem selectcId = new AddItem();
+                country_id = selectcId.select_id("country", "country_id", "country_name", madeIn);
+
             }
             if (com_company.SelectedItem == null)
             {
@@ -206,97 +217,74 @@ namespace AutoParts
             }
             else
             {
-                company = com_company.SelectedItem.ToString();
+                string companyname = com_company.SelectedItem.ToString();
+
+                AddItem selectId = new AddItem();
+                company = selectId.select_id("items_brand", "items_brand_id", "items_brand_name", companyname);
             }
 
-            for (int s = 0; s < part_type.Items.Count; s++)
+
+
+            for (int i = 0; i < part_type.Items.Count; i++)
             {
-                if (part_type.GetItemChecked(s))
+
+                if (part_type.GetItemChecked(i))
                 {
+                    string strname = (string)part_type.Items[i];
+                    AddItem selectId = new AddItem();
+                    string partID = selectId.select_id("part_type", "part_type_id", "part_type_name", strname);
 
 
-                    string str = (string)part_type.Items[s];
-                    if (company == "" && madeIn == "")
+
+                    if (company == "" && country_id == "")
                     {
-                        query = "select  count(*) from item_details inner join cost on cost.partNumber=item_details.part_number inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
 
+                        query = " select  item_details.items_details_id,item_details.company_part_no ,part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name from item_details inner join cost on cost.partNumber = item_details.part_number inner join part_type on item_details.part_type_id = part_type.part_type_id  inner join country on item_details.country_id = country.country_id inner join items_brand on items_brand.items_brand_id = item_details.items_brand_id where part_type.part_type_id ='" + partID + "' and " + vehicleID + " IN(vehicle_type_id_0, vehicle_type_id_1, vehicle_type_id_2, vehicle_type_id_3, vehicle_type_id_4, vehicle_type_id_5, vehicle_type_id_6, vehicle_type_id_7, vehicle_type_id_8, vehicle_type_id_9)";
                     }
                     else if (company == "")
                     {
-                        query = "select count(*) from item_details inner join cost on cost.partNumber=item_details.part_number  inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "' and country.country_name='" + madeIn + "'";//    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
+                        query = " select item_details.items_details_id,item_details.company_part_no ,part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name from item_details inner join cost on cost.partNumber = item_details.part_number inner join part_type on item_details.part_type_id = part_type.part_type_id  inner join country on item_details.country_id = country.country_id inner join items_brand on items_brand.items_brand_id = item_details.items_brand_id where part_type.part_type_id ='" + partID + "' and " + vehicleID + " IN(vehicle_type_id_0, vehicle_type_id_1, vehicle_type_id_2, vehicle_type_id_3, vehicle_type_id_4, vehicle_type_id_5, vehicle_type_id_6, vehicle_type_id_7, vehicle_type_id_8, vehicle_type_id_9) and country.country_id='" + country_id + "'";//    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
                     }
-                    else if (madeIn == "")
+                    else if (country_id == "")
                     {
-                        query = "select count(*) from item_details inner join cost on cost.partNumber=item_details.part_number  inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "' and items_brand.items_brand_name='" + company + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
+                        query = " select item_details.items_details_id,item_details.company_part_no ,part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name from item_details inner join cost on cost.partNumber = item_details.part_number inner join part_type on item_details.part_type_id = part_type.part_type_id  inner join country on item_details.country_id = country.country_id inner join items_brand on items_brand.items_brand_id = item_details.items_brand_id where part_type.part_type_id ='" + partID + "' and " + vehicleID + " IN(vehicle_type_id_0, vehicle_type_id_1, vehicle_type_id_2, vehicle_type_id_3, vehicle_type_id_4, vehicle_type_id_5, vehicle_type_id_6, vehicle_type_id_7, vehicle_type_id_8, vehicle_type_id_9) and items_brand.items_brand_id='" + company + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
                     }
                     else
                     {
-                        query = "select count(*) from item_details inner join cost on cost.partNumber=item_details.part_number  inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "' and country.country_name='" + madeIn + "' and items_brand.items_brand_name='" + company + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
+                        query = " select item_details.items_details_id,item_details.company_part_no ,part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name from item_details inner join cost on cost.partNumber = item_details.part_number inner join part_type on item_details.part_type_id = part_type.part_type_id  inner join country on item_details.country_id = country.country_id inner join items_brand on items_brand.items_brand_id = item_details.items_brand_id where part_type.part_type_id ='" + partID + "' and " + vehicleID + " IN(vehicle_type_id_0, vehicle_type_id_1, vehicle_type_id_2, vehicle_type_id_3, vehicle_type_id_4, vehicle_type_id_5, vehicle_type_id_6, vehicle_type_id_7, vehicle_type_id_8, vehicle_type_id_9) and country.country_id='" + country_id + "' and items_brand.items_brand_id='" + company + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
                     }
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlCommand command = new MySqlCommand(query, connection);
                     connection.Open();
-                    MySqlDataReader qmdr;
+                    MySqlDataReader mdr;
 
-                    qmdr = cmd.ExecuteReader();
-                    while (qmdr.Read())
+                    mdr = command.ExecuteReader();
+                    while (mdr.Read())
                     {
 
 
-                        quantity = qmdr.GetString("count(*)");
+                        item_id = mdr.GetString("items_details_id");
+                        partTypeName = mdr.GetString("part_type_name");
+                        partNumber = mdr.GetString("part_number");
+                        countries = mdr.GetString("country_name");
+                        //  quantity = mdr.GetString("count(*)");
+                        costPrice = mdr.GetString("cost");
+                        //     vName = mdr.GetString("vehicle_name");
+                        //    bName = mdr.GetString("brand_name");
 
-                        //   this.searchGrid.Rows.Add(partNumber, partTypeName, countries, vName, bName, quantity, costPrice);
                     }
-                    qmdr.Close();
-                    connection.Close();
-
-                    // MessageBox.Show(txt.ToString());
-                }
-                //  connection.Close();
-
-                //    connection.Open();
-                for (int i = 0; i < part_type.Items.Count; i++)
-                {
-                    if (part_type.GetItemChecked(i))
-                    {
-
-
-                        string str = (string)part_type.Items[i];
-                        if (company == "" && madeIn == "")
-                        {
-                            query = " select   item_details.company_part_no ,part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name,vehicle_brand.brand_name,vehicle_type.vehicle_name from item_details inner join cost on cost.partNumber=item_details.part_number inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
-
-                        }
-                        else if (company == "")
-                        {
-                            query = " select  item_details.company_part_no, part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name,vehicle_brand.brand_name,vehicle_type.vehicle_name from item_details inner join cost on cost.partNumber=item_details.part_number  inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "' and country.country_name='" + madeIn + "'";//    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
-                        }
-                        else if (madeIn == "")
-                        {
-                            query = " select  item_details.company_part_no, part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name,vehicle_brand.brand_name,vehicle_type.vehicle_name from item_details inner join cost on cost.partNumber=item_details.part_number  inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "' and items_brand.items_brand_name='" + company + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
-                        }
-                        else
-                        {
-                            query = " select  item_details.company_part_no, part_type.part_type_name ,item_details.part_number,cost.cost,country.country_name,vehicle_brand.brand_name,vehicle_type.vehicle_name from item_details inner join cost on cost.partNumber=item_details.part_number  inner join part_type on item_details.part_type_id=part_type.part_type_id inner join vehicle_brand on item_details.vehicle_brand_id=vehicle_brand.vehicle_brand_id inner join vehicle_type on vehicle_type.vehicle_type_id=item_details.vehicle_type_id inner join country on item_details.country_id=country.country_id inner join items_brand on items_brand.items_brand_id=item_details.items_brand_id where part_type.part_type_name='" + str + "' and vehicle_brand.brand_name='" + brand + "'and vehicle_type.vehicle_name='" + type + "' and country.country_name='" + madeIn + "' and items_brand.items_brand_name='" + company + "'"; //    where part_type.part_type_name='" + str+"' and vehicle_brand.brand_name='nissan'";
-                        }
-                        MySqlCommand command = new MySqlCommand(query, connection);
-                        connection.Open();
-                        MySqlDataReader mdr;
-
-                        mdr = command.ExecuteReader();
-                        while (mdr.Read())
-                        {
-
-                            partTypeName = mdr.GetString("part_type_name");
-                            partNumber = mdr.GetString("part_number");
-                            countries = mdr.GetString("country_name");
-                            //  quantity = mdr.GetString("count(*)");
-                            costPrice = mdr.GetString("cost");
-                            vName = mdr.GetString("vehicle_name");
-                            bName = mdr.GetString("brand_name");
-                            this.searchGrid.Rows.Add(partNumber, partTypeName, countries, vName, bName, quantity, costPrice);
-                        }
                         mdr.Close();
                         connection.Close();
+                        string count = "select count(*) from item where items_detailId='" + item_id + "';";
+                        MySqlCommand cmd = new MySqlCommand(count, connection);
+                        MySqlDataReader cmdr;
+                        connection.Open();
+                        cmdr = cmd.ExecuteReader();
+                        cmdr.Read();
+                        quantity = cmdr.GetString("count(*)");
+                        mdr.Close();
+                        connection.Close();
+                        this.searchGrid.Rows.Add(partNumber, partTypeName, countries, com_vehicle_type.Text, com_brand.Text, quantity, costPrice);
+
 
                         // MessageBox.Show(txt.ToString());
                     }
@@ -304,7 +292,9 @@ namespace AutoParts
                 }
 
             }
-        }
+        
+            
+        
                private void searchGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1 && e.ColumnIndex > -1)
@@ -364,9 +354,10 @@ namespace AutoParts
     
     private void com_vehicle_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
 
 
+            this.searchGrid.DataSource = null;
+            this.searchGrid.Rows.Clear();
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -377,12 +368,14 @@ namespace AutoParts
 
         private void com_made_in_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            this.searchGrid.DataSource = null;
+            this.searchGrid.Rows.Clear();
         }
 
         private void com_company_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            this.searchGrid.DataSource = null;
+            this.searchGrid.Rows.Clear();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

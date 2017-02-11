@@ -31,3 +31,4 @@ E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsAppli
 E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.signup.resources
 E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.stock.resources
 E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.AddItem.resources
+E:\Hashini_auto\system\New folder (3)\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\AutoParts.addVehicle.resources

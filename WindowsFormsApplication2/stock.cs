@@ -16,6 +16,7 @@ namespace AutoParts
         MySqlConnection connection = new MySqlConnection("datasource=localhost;Database=hashini_auto;port=3306;username=root;password=");
         List<string> barcodeNumbers = new List<string>();
         //  List<string> barcodeTable = new List<string>();
+        string code;
         string cmbpartValue;
         string cmbcomValue;
         string cmbItemValue;
@@ -88,19 +89,26 @@ namespace AutoParts
         private void txtbarcodeKeyPress(object sender, KeyEventArgs e)
 
         {
-
+           
             if (e.KeyCode == Keys.Enter)
             {
+               
                 if (!string.IsNullOrWhiteSpace(txtbarcode.Text) || IsDigitsOnly(txtbarcode.Text) || !string.IsNullOrWhiteSpace(cmbcompanypartno.Text) || !string.IsNullOrWhiteSpace(cmbpartnumber.Text))
                 {
+                   
                     MessageBox.Show(txtbarcode.Text);
-                    string getb = "SELECT * FROM item where barcode ='" + txtbarcode.Text + "'";
+                    string getb = "SELECT barcode FROM item where barcode ='" + txtbarcode.Text + "'";
                     MySqlCommand Barcode = new MySqlCommand(getb, connection);
                     MySqlDataReader bmdr;
                     connection.Open();
                     bmdr = Barcode.ExecuteReader();
+                    while (bmdr.Read())
+                    {
+                        code = bmdr.GetString("barcode");
+                    }
+                    bmdr.Close();
                     connection.Close();
-                    if (bmdr != null)
+                    if (code != null)
                     {
                         MessageBox.Show("Entered Barcode is already input ");
                         txtbarcode.Text = "";
@@ -219,64 +227,65 @@ namespace AutoParts
 
         private void btnconfirm_Click(object sender, EventArgs e)
         {
-
-          //  string partno = cmbpartnumber.SelectedItem.ToString();
-          //  string company_PartNo = cmbcompanypartno.SelectedItem.ToString();
-            string supplier = cmbSuppliers.SelectedItem.ToString();
-            string date_time = txtdate.Text;
-            // connection.Open();
-            for (int i = 0; i < ((stockgrid.Rows.Count) - 1); i++)
+            if (stockgrid.Rows.Count != 0)
             {
-                string costmatch = "select cost.cost,cost.cost_id from cost where partNumber='" + stockgrid.Rows[i].Cells["part_number"].Value + "'and company_part_no='" + stockgrid.Rows[i].Cells["company_number"].Value + "'";
-                MySqlCommand cmdcost = new MySqlCommand(costmatch, connection);
+                //  string partno = cmbpartnumber.SelectedItem.ToString();
+                //  string company_PartNo = cmbcompanypartno.SelectedItem.ToString();
+                string supplier = cmbSuppliers.SelectedItem.ToString();
+                string date_time = txtdate.Text;
+                // connection.Open();
+                for (int i = 0; i < ((stockgrid.Rows.Count) - 1); i++)
+                {
+                    string costmatch = "select cost.cost,cost.cost_id from cost where partNumber='" + stockgrid.Rows[i].Cells["part_number"].Value + "'and company_part_no='" + stockgrid.Rows[i].Cells["company_number"].Value + "'";
+                    MySqlCommand cmdcost = new MySqlCommand(costmatch, connection);
+                    connection.Open();
+                    MySqlDataReader cmdr;
+                    cmdr = cmdcost.ExecuteReader();
+                    cmdr.Read();
+                    string checkCost = cmdr.GetString("cost");
+                    string costId = cmdr.GetString("cost_id");
+                    cmdr.Close();
+                    connection.Close();
+                    // string cost= stockgrid.Rows[i].Cells["cost"].Value.
+                    if (checkCost == stockgrid.Rows[i].Cells["cost"].Value.ToString())
+                    {
+
+
+                        string barcodeQuery = "INSERT INTO `hashini_auto`.`item` (`barcode`, `items_detailId`, `status_id`,`purchase_id`) VALUES ('" + stockgrid.Rows[i].Cells["barcode_number"].Value + "', '" + itemDetailsId + "','1','" + txtpurchase_id.Text + "') "; //'" + supplier_id + "'," + txtpurchase_id.Text + ",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
+                        MySqlCommand barcodecommand = new MySqlCommand(barcodeQuery, connection);
+                        connection.Open();
+                        barcodecommand.ExecuteNonQuery();
+                        MessageBox.Show("data entered Succesfully");
+                        connection.Close();
+                    }
+                    else
+                    {
+                        string updateQuery = "UPDATE `hashini_auto`.`cost` SET `cost`= '" + stockgrid.Rows[i].Cells["cost"].Value + "' WHERE `cost_id`= '" + costId + "'";
+                        MySqlCommand upquery = new MySqlCommand(updateQuery, connection);
+                        connection.Open();
+                        upquery.ExecuteNonQuery();
+                        MessageBox.Show("data cost updated Succesfully");
+                        connection.Close();
+
+                        string barcodeQuery = "INSERT INTO `hashini_auto`.`item` (`barcode`, `items_detailId`, `status_id`,`purchase_id`) VALUES ('" + stockgrid.Rows[i].Cells["barcode_number"].Value + ", (select items_details_id from item_details where part_number='" + stockgrid.Rows[i].Cells["part_number"] + "' and ' item_details.item_details_id= '" + itemDetailsId + "'),'1','" + txtpurchase_id.Text + "') "; //'" + supplier_id + "'," + txtpurchase_id.Text + ",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
+                        MySqlCommand barcodecommand = new MySqlCommand(barcodeQuery, connection);
+                        connection.Open();
+                        barcodecommand.ExecuteNonQuery();
+                        MessageBox.Show("data entered Succesfully");
+                        connection.Close();
+
+                    }
+                }
+
+                string purchase = "INSERT INTO `hashini_auto`.`purchase_item` (`purchase_item_id`, `purchase_date`, `supplier_id`, `order_id`) VALUES ('" + txtpurchase_id.Text + "','" + txtdate.Text + "',(select supplier_id from supplier where supplier_name='" + supplier + "'),'2')";
+                MySqlCommand purchasecmd = new MySqlCommand(purchase, connection);
                 connection.Open();
-                MySqlDataReader cmdr;
-                cmdr = cmdcost.ExecuteReader();
-                cmdr.Read();
-                string checkCost = cmdr.GetString("cost");
-                string costId = cmdr.GetString("cost_id");
-                cmdr.Close();
+                purchasecmd.ExecuteNonQuery();
+                MessageBox.Show("User crested Succesfully");
                 connection.Close();
-               // string cost= stockgrid.Rows[i].Cells["cost"].Value.
-                if (checkCost == stockgrid.Rows[i].Cells["cost"].Value.ToString())
-                {
 
-
-                    string barcodeQuery = "INSERT INTO `hashini_auto`.`item` (`barcode`, `items_detailId`, `status_id`,`purchase_id`) VALUES ('" + stockgrid.Rows[i].Cells["barcode_number"].Value + "', '" + itemDetailsId + "')','1','" + txtpurchase_id.Text + "') "; //'" + supplier_id + "'," + txtpurchase_id.Text + ",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
-                    MySqlCommand barcodecommand = new MySqlCommand(barcodeQuery, connection);
-                    connection.Open();
-                    barcodecommand.ExecuteNonQuery();
-                    MessageBox.Show("data entered Succesfully");
-                    connection.Close();
-                }
-                else
-                {
-                    string updateQuery = "UPDATE `hashini_auto`.`cost` SET `cost`= '" + stockgrid.Rows[i].Cells["cost"].Value + "' WHERE `cost_id`= '"+costId+"'";
-                    MySqlCommand upquery = new MySqlCommand(updateQuery, connection);
-                    connection.Open();
-                    upquery.ExecuteNonQuery();
-                    MessageBox.Show("data cost updated Succesfully");
-                    connection.Close();
-
-                    string barcodeQuery = "INSERT INTO `hashini_auto`.`item` (`barcode`, `item_detailedId`, `status_id`,`purchase_id`) VALUES ('" + stockgrid.Rows[i].Cells["barcode_number"].Value + ", (select items_details_id from item_details where part_number='" + stockgrid.Rows[i].Cells["part_number"] + "' and ' item_details.item_details_id= '" + itemDetailsId + "'),'1','" + txtpurchase_id.Text + "') "; //'" + supplier_id + "'," + txtpurchase_id.Text + ",'" + vehicle_type_id + "','" + vehicle_brand_id + "','" + part_type_id + "','" + country_id + "','" + item_brand_id + "','" + companyPartNo + "')";// '1', '1', '1', '1', '1', '1', '1', '123');
-                    MySqlCommand barcodecommand = new MySqlCommand(barcodeQuery, connection);
-                    connection.Open();
-                    barcodecommand.ExecuteNonQuery();
-                    MessageBox.Show("data entered Succesfully");
-                    connection.Close();
-
-                }
             }
-
-            string purchase = "INSERT INTO `hashini_auto`.`purchase_item` (`purchase_item_id`, `purchase_date`, `supplier_id`, `order_id`) VALUES ('" + txtpurchase_id.Text + "','" + txtdate.Text + "',(select supplier_id from supplier where supplier_name='" + supplier + "'),'2')";
-            MySqlCommand purchasecmd = new MySqlCommand(purchase, connection);
-            connection.Open();
-            purchasecmd.ExecuteNonQuery();
-            MessageBox.Show("User crested Succesfully");
-            connection.Close();
-         
         }
-
         private void btnNewItem_Click(object sender, EventArgs e)
         {
             var myForm = new AddItem();

@@ -53,6 +53,7 @@ namespace AutoParts
             mdr = cmdInsert.ExecuteReader();
             mdr.Read();
             string coloumnId = mdr.GetString(col_id);
+           
             connection.Close();
             return coloumnId;
         }
@@ -382,6 +383,12 @@ namespace AutoParts
             if (e.KeyCode == Keys.Left) {
                 txtPartNumber.Focus();
             }
+        }
+
+        private void lbladdvehicle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var myForm = new addVehicle();
+            myForm.Show();
         }
     }
     }

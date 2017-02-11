@@ -14,7 +14,7 @@ namespace AutoParts
 
     public partial class Payment : Form
     {
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;Database=hashini_auto;port=3306;username=root;password=root");
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;Database=hashini_auto;port=3306;username=root;password=");
         List<string> paymentGridColumns = new List<string>() {"barcodeCol", "partnoCol", "nameCol", "brandCol", "qtyCol", "discountCol", "priceCol", "subtotalCol" };
         List<string> barcodeNumbers = new List<string>();
 
@@ -138,14 +138,14 @@ namespace AutoParts
                     MessageBox.Show("Entered barcode is already in the checkout table.");
                 }
                 else { 
-                    connection.Open();
+                    
                     string selectQuery = "SELECT item.company_part_no,part_type.part_type_name,items_brand.items_brand_name,item.cost_price FROM hashini_auto.item_details as item left join hashini_auto.items_brand on items_brand.items_brand_id=item.items_brand_id left join hashini_auto.part_type on part_type.part_type_id=item.part_type_id where item.barcode=" + barcodeTxt.Text + " and item.status_id != 2;";
                     MySqlCommand select = new MySqlCommand(selectQuery, connection);
 
 
                     try
                     {
-
+                        connection.Open();
                         MySqlDataReader mdr = select.ExecuteReader();
                         while (mdr.Read())
                         {
@@ -172,6 +172,7 @@ namespace AutoParts
                                     }
                                 }
                             }
+                            connection.Close();
                         }
 
                         mdr.Close();

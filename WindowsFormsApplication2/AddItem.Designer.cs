@@ -52,6 +52,7 @@
             this.cmbPartName = new System.Windows.Forms.ComboBox();
             this.chklistVehicle = new System.Windows.Forms.CheckedListBox();
             this.chkotherB = new System.Windows.Forms.CheckBox();
+            this.lbladdvehicle = new System.Windows.Forms.LinkLabel();
             btnAddItems = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -325,12 +326,26 @@
             this.chkotherB.UseVisualStyleBackColor = false;
             this.chkotherB.CheckedChanged += new System.EventHandler(this.chkotherB_CheckedChanged);
             // 
+            // lbladdvehicle
+            // 
+            this.lbladdvehicle.AutoSize = true;
+            this.lbladdvehicle.BackColor = System.Drawing.Color.Transparent;
+            this.lbladdvehicle.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lbladdvehicle.Location = new System.Drawing.Point(296, 314);
+            this.lbladdvehicle.Name = "lbladdvehicle";
+            this.lbladdvehicle.Size = new System.Drawing.Size(86, 13);
+            this.lbladdvehicle.TabIndex = 39;
+            this.lbladdvehicle.TabStop = true;
+            this.lbladdvehicle.Text = "Add new vehicle";
+            this.lbladdvehicle.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbladdvehicle_LinkClicked);
+            // 
             // AddItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(775, 454);
+            this.Controls.Add(this.lbladdvehicle);
             this.Controls.Add(this.chkotherB);
             this.Controls.Add(this.chklistVehicle);
             this.Controls.Add(this.cmbPartName);
@@ -388,5 +403,6 @@
         private System.Windows.Forms.ComboBox cmbPartName;
         private System.Windows.Forms.CheckedListBox chklistVehicle;
         private System.Windows.Forms.CheckBox chkotherB;
+        private System.Windows.Forms.LinkLabel lbladdvehicle;
     }
 }
